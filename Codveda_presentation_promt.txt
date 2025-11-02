@@ -1,0 +1,50 @@
+**Canva AI Prompt for Codveda Data Science Internship Presentation:**
+
+Create a professional PowerPoint-style presentation deck with exactly 11 slides for a Data Science Internship Project at Codveda. The audience is potential employers and technical evaluators, so keep the tone formal, technical, and results-oriented—emphasize methodology, workflow, and quantitative insights to showcase expertise in data science applications. Goal: Highlight practical skills for a job interview or portfolio.
+
+**Overall Style:** Corporate and minimalistic. Use a clean layout with neutral colors: white background, blue (#007BFF) accents for headers/titles, gray (#6C757D) for text/subheadings. Subtle data visuals only (e.g., simple charts, no flashy animations). Fonts: Roboto or Open Sans (sans-serif, professional). No cartoon icons, bright gradients, or clutter—keep it sleek, with ample white space, bullet points for readability, and high-contrast for readability. Each slide has a title in bold blue, body text in gray, and footer with slide number and "Codveda Data Science Internship | Mina [Last Name]".
+
+**Slide Structure (follow exactly, using provided content—do not add or omit):**
+
+1. **Title Slide:** Centered layout. Title: "Codveda Data Science Internship Project". Subtitle: "Predictive Modeling for Real Estate Trends | Intern: Mina | Organization: Codveda | Role: Data Science Intern | Duration: [Insert Dates]". Add subtle blue line divider. No visuals.
+
+2. **Slide 2: Introduction**  
+   Objective: Apply full Data Science workflow from data collection to predictive modeling using real-world datasets from Codveda's team. Demonstrates proficiency in data wrangling, EDA, feature engineering, and ML. Bullet points for key skills. Subtle workflow diagram (simple arrows: Data → EDA → Modeling → Insights) in gray/blue.
+
+3. **Slide 3: Project Overview**  
+   Goal: Develop predictive model for key trends and forecasting target outcomes (real estate prices). Key Tasks: Bullet list—Data gathering/cleaning, EDA, Feature engineering, Predictive modeling, Evaluation. Clean bullet layout.
+
+4. **Slide 4: Data Collection**  
+   Sources: CSV datasets from Codveda mentors; supplementary open data repos. Process: Bullets on verification, unification, integrity checks. Include a simple table: | Aspect | Method | (e.g., Missing Values | Checked via Pandas).
+
+5. **Slide 5: Data Cleaning and Preprocessing**  
+   Techniques: Bullets—Missing values (mean/median imputation), Duplicates removal, Outliers (IQR/z-score), Encoding (One-Hot/Label), Scaling (Min-Max). Tools: Inline icons (gray) for pandas, numpy, scikit-learn. Subtle before/after bar chart for data quality.
+
+6. **Slide 6: Exploratory Data Analysis (EDA) Summary**  
+   Examined real estate dataset using Pandas, NumPy, Seaborn, and Matplotlib. YData Profiling report overview: feature distributions, data types, anomalies. Numerical vars (Price EGP, sqm) right-skewed—corrected via log transformations. Pearson/Spearman correlations: Strong positive/monotonic links between price and size vars, key for prediction. Visuals normalized skew, boosted interpretability. Dataset clean, no severe multicollinearity. Include: Correlation heatmap snippet (subtle blue/gray) and histogram pair (pre/post log transform).
+
+7. **Slide 7: Feature Engineering**  
+   Bullets: Interaction vars/ratio metrics, Log transforms for skew, VIF for multicollinearity, RFE for top features. Add simple VIF table: | Feature | VIF Score | (e.g., Size | 1.2). Gray line chart for feature importance.
+
+8. **Slide 8: Predictive Modeling**  
+   Models: Bullets—Linear Regression, Decision Tree, Random Forest, Gradient Boosting. Selection: CV=5, Metrics (MAE/RMSE/R²), GridSearchCV optimization. Subtle model comparison bar chart (blue bars for metrics).
+
+9. **Slide 9: Model Evaluation**  
+   Table (clean, gray borders): | Model | MAE | RMSE | R² |  
+   | Linear Regression | 0.22 | 0.44 | 0.92 |  
+   | Decision Tree | 0.21 | 0.40 | 0.93 |  
+   | Random Forest | **0.18** | **0.36** | **0.95** |  
+   Best: Random Forest (highest accuracy, lowest errors). Highlight bold. Scatter plot: Predicted vs Actual (subtle blue dots).
+
+10. **Slide 10: Insights and Results**  
+    Bullets: Top predictors identified, Accuracy improved via features, Strong generalization, Prediction vs actual visuals confirm consistency. Include line graph for trend forecasting (neutral colors).
+
+11. **Slide 11: Conclusion & Tools**  
+    Conclusion: Hands-on full DS lifecycle; high accuracy model aligns with Codveda standards. Tools Table: | Category | Tools |  
+    | Programming | Python (pandas, numpy, scikit-learn) |  
+    | Visualization | Matplotlib, Seaborn, Plotly |  
+    | Development | Jupyter, VS Code |  
+    | Version Control | Git & GitHub |  
+    Acknowledgment: Thanks to Codveda Technical Team. End with call-to-action: "Q&A | Contact: [Email]".
+
+Ensure transitions are fade-only, total length fits 10-12 min presentation. Export as editable PPTX. Make it pixel-perfect—no typos, align all elements left/center as needed.
