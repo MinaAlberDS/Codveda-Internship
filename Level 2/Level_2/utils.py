@@ -10,11 +10,18 @@ from typing import Literal
 from sklearn.model_selection import train_test_split
 from statsmodels.stats.multitest import multipletests
 
-def set_xy(data, outliers=False, outliers_list=None, drop_cols=None):
+def set_xy(data, y_col, outliers=False, outliers_list=None, drop_cols=None):
     """
     Splits data into X (predictors) and y (target), with optional outlier filtering.
+    
+    Args:
+        data (DataFrame): The input dataset.
+        y_col (str): The name of the target variable column.
+        outliers (bool, optional): If True, keep only outliers; if False, remove outliers. Defaults to False.
+        outliers_list (list, optional): List of columns indicating outliers. Defaults to None.
+        drop_cols (list, optional): Additional columns to drop from X. Defaults to None.
     """
-    drop_cols = drop_cols or ["name", "log(price)", "log(price/sqm)", "Is log(price/sqm) outlier"]
+    drop_cols = drop_cols + [y_col] or ["name", "log(price)", "log(price/sqm)", "Is log(price/sqm) outlier"]
 
     try:
         if outliers_list is not None:
@@ -30,7 +37,7 @@ def set_xy(data, outliers=False, outliers_list=None, drop_cols=None):
         print(f"Warning: outlier filtering skipped due to: {e}")
 
     x = data.drop(drop_cols, axis=1, errors='ignore')
-    y = data["log(price)"]
+    y = data[y_col]
 
     return x, y
 
@@ -145,3 +152,23 @@ def general_to_specific(df, y_col, x_cols, pval_threshold=0.05, vif_threshold=10
         print(f"The final model summary:\n{model.summary2()}")
     return model, removed_vars, final_vif
 
+def reg_summary(X_train, y_train, reg_type: Literal["Logistic", "Linear"] = "Linear"):
+    """Return the statsmodels model summary
+
+    Args:
+        X_train (DataFrame): X train matrix
+        y_train (Array_like): Dependent variable
+        reg_type ("Logistic", "Linear"): Select the regression to perform the summary
+    Returns:
+        Model_summary: Return the model summary(F-statistic, R-squared, etc.)
+    """
+### See the summary of the model using statsmodels
+
+    if reg_type == "Logistic":
+        reg_sms = sms.Logit(y_train, sms.add_constant(X_train)).fit()
+    elif reg_type == "Linear":
+        reg_sms = sms.OLS(y_train, sms.add_constant(X_train)).fit()
+
+    results = reg_sms.summary2()
+
+    print(f"The regression model summary:\n{results}")
