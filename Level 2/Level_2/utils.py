@@ -39,7 +39,7 @@ def set_xy(data, y_col, outliers=False, outliers_list=None, drop_cols=None):
     x = data.drop(drop_cols, axis=1, errors='ignore')
     y = data[y_col]
 
-    return x, y
+    return [x, y]
 
 
 def split_data(X,y, test_size:float = 0.2):
@@ -54,11 +54,11 @@ def split_data(X,y, test_size:float = 0.2):
         X_train, X_test, y_train, y_test: Return the train, and test data
     """
     # Split into train, and test data
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42) # test data is 20% of the data which equals 146 row
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42) # test data is 20% of the data
     return [X_train, X_test, y_train, y_test]
 
 def general_to_specific(df, y_col, x_cols, pval_threshold=0.05, vif_threshold=10.0,
-                        correction='fdr_bh', verbose=True, reg_type: Literal["Logistic", "Linear"] = "Linear"):
+                        correction='fdr_bh', verbose=True, robust_se:bool=False, reg_type: Literal["Logistic", "Linear"] = "Linear"):
     """
     General-to-Specific model selection using corrected p-values and VIF reduction.
     
@@ -78,6 +78,8 @@ def general_to_specific(df, y_col, x_cols, pval_threshold=0.05, vif_threshold=10
         Type of p-value correction ('bonferroni', 'fdr_bh', etc.).
     verbose : bool
         Whether to print progress.
+    robust_se : bool
+        Whether to use robust standard errors (only for Linear regression).
     reg_type ("Logistic", "Linear"): Select the regression to perform the GETS method
 
     Returns
@@ -96,9 +98,12 @@ def general_to_specific(df, y_col, x_cols, pval_threshold=0.05, vif_threshold=10
         X = sms.add_constant(df[current_x])
         y = df[y_col]
         if reg_type == "Linear":
-            model = sms.OLS(y, X).fit(cov_type = "HC3") # robust standard error for t-tests
+            if robust_se:
+                model = sms.OLS(y, X).fit(cov_type='HC3') # robust standard error for t-tests
+            else:
+                model = sms.OLS(y, X).fit() # robust standard error for t-tests
         elif reg_type == "Logistic":
-            model = sms.Logit(y,X).fit(cov_type="HC3")
+            model = sms.Logit(y,X).fit()
 
         # 1️⃣ Corrected p-values
         pvals = model.pvalues.drop('const', errors='ignore')
