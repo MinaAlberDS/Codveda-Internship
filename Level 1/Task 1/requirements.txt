@@ -1,6 +1,7 @@
 requests
-bs4
+beautifulsoup4
 pandas
-numpy
-time
-json
+lxml
+pytest
+pytest-mock
+flake8
